@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+        <style>
+            body{
+                background-color: gray;
+                font-family: Arial, Helvetica, sans-serif;
+                color: black;
+                align-items: center;
+                justify-content: center;
+            }
+
+            button {   
+        background-color: black;   
+        width: 30%;  
+        color: rgb(244, 248, 248);  
+        font-family: Arial, Helvetica, sans-serif; 
+        padding: 15px;   
+        padding-left: 20px;
+        margin: 0px 0px ;   
+        border: 1px solid blue;   
+        cursor: pointer; 
+        align-items: center;
+          
+         }   
+
+            .login-page{
+                padding: 25px;
+                margin: auto;
+                margin-top: 100px;
+                 background-color: white; 
+                 border-style: solid;
+                 border-width: 1px;
+                 border-color: blue;
+                 max-width: 350px;
+                 position: relative;
+                 align-items: center;                
+            }
+
+            .name , .pass{
+                width: 90%;   
+                margin: 10px 0;  
+                padding: 10px 20px;   
+                display: inline-block;      
+                box-sizing: border-box;   
+            }
+            
+            .submit_btn{
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height:50px;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="login-page">
+            <form name="login" onsubmit="return checkCookie()">
+
+                <div class="name">
+                     <label for="uname">Username</label>
+                     <input type="text" name="uname" value="" required>
+                </div>
+
+                <div class="pass">
+                    <label for="upass">Password</label>
+                    <input type="password" name="upass" value="" required>
+                </div>
+
+                <div class="checkbox">
+                    <input type="checkbox" checked="unchecked"> Remember me 
+                </div>
+
+                <div class="submit_btn"> 
+                    <button type="submit"name="btn" value="Submit"><b>
+                        Login</b></button>    
+                </div>
+            </form>
+            </div>
+            <script type="text/javascript">
+
+
+
+            
+            function setCookie() {
+            var d = new Date();
+            d.setTime(d.getTime() + (24*60*60*1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie =  "username = LTI ;" + expires + ";path=/";
+            }
+
+            function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for(var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+            }
+
+            function checkCookie() {
+            var user=getCookie("username");
+            var uname=document.login.uname.value;
+            if (user == uname) {
+                alert("Welcome again " + user);
+                var myWindow = window.open("", "_self");
+                myWindow.document.write("<p>Welcome to LTI</p>");
+            } else {
+                if (user != "" && user != null) {
+                setCookie();
+                validation();
+                }
+            }
+            }
+            
+            function validation(){
+                var uname=document.login.uname.value;
+                var pwd=document.login.upass.value;
+
+                if(uname=="LTI" && pwd=="123")
+                {
+                    var myWindow = window.open("", "_self");
+                    myWindow.document.write("<p>Welcome to LTI</p>");
+                    return;
+                }
+                else
+                {
+                    alert("Invalid Username/Password. Try again!");
+                    return;
+                }
+            } 
+            
+            </script>
+            
+        
+    </body>
+</html>
